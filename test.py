@@ -11,11 +11,7 @@ def index():
 @app.route('/encode', methods=['POST'])
 def encode():
     # append encode code
-
-    string = request.form['dec_input']
-    cmd = f'echo {string} | base64'
-    output = subprocess.check_output(cmd, shell=True).decode().strip()
-    return render_template('index.html', encoded=output)
+    pass
 
 
 @app.route('/decode', methods=['POST'])
