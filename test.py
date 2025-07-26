@@ -11,7 +11,7 @@ def index():
 @app.route('/encode', methods=['POST'])
 def encode():
     # append encode code
-    pass
+    print("teststsetsetset")
 
 
 @app.route('/decode', methods=['POST'])
