@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import os, subprocess
+import base64
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
@@ -11,18 +12,17 @@ def index():
 @app.route('/encode', methods=['POST'])
 def encode():
     # append encode code
-    print("teststsetsetset")
-
+    string_to_encode = request.form['dec_input'].encode('utf-8')
+    output = base64.b64encode(string_to_encode).decode('utf-8')
+    return output
 
 @app.route('/decode', methods=['POST'])
 def decode():
     # append decode code
 
-    string = request.form['enc_input']
-    cmd = f'echo {string} | base64 -d'
-    output = subprocess.check_output(cmd, shell=True).decode().strip()
-    return render_template('index.html', decoded=output)
-
+    string_to_decode = request.form['enc_input'].encode('utf-8')
+    output = base64.b64decode(string_to_decode).decode('utf-8')
+    return output
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80)
